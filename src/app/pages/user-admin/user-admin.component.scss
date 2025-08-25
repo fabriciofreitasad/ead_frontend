@@ -1,0 +1,14 @@
+.user-admin {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+}
+mat-card { width: min(1100px, 100%); }
+.row { display: flex; gap: 12px; align-items: center; }
+.col { display: grid; gap: 12px; }
+.grow { flex: 1; min-width: 180px; }
+.small { width: 140px; }
+.list { display: grid; gap: 8px; }
+.end { justify-content: flex-end; }
+.pane { padding: 12px 4px; }
+h3 { margin: 16px 0 2px; }

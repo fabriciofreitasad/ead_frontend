@@ -1,0 +1,87 @@
+<div class="register-component">
+  <mat-card class="reg-card mat-elevation-z2">
+    <mat-card-header class="padding-m">
+      <mat-card-title>Cadastro de Usuário</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()" class="reg-form">
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nome Completo*</mat-label>
+          <input matInput formControlName="nome" placeholder="Seu nome completo" />
+          <mat-error *ngIf="form.get('nome')?.invalid && (form.get('nome')?.touched || form.get('nome')?.dirty)">{{ nomeErrors() }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email*</mat-label>
+          <input matInput formControlName="email" placeholder="seuemail@exemplo.com" />
+          <mat-error *ngIf="form.get('email')?.invalid && (form.get('email')?.touched || form.get('email')?.dirty)">{{ emailErrors() }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Senha*</mat-label>
+          <input matInput type="password" formControlName="senha" placeholder="Cadastre sua senha" />
+          <mat-error *ngIf="form.get('senha')?.invalid && (form.get('senha')?.touched || form.get('senha')?.dirty)">{{ senhaErrors() }}</mat-error>
+        </mat-form-field>
+
+        <!-- Endereço (primeiro item do array) -->
+        <div formArrayName="enderecos" class="block">
+          <div [formGroupName]="0">
+            <div class="grid">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Rua</mat-label>
+                <input matInput formControlName="rua">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Número</mat-label>
+                <input matInput type="number" formControlName="numero">
+              </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Complemento</mat-label>
+              <input matInput formControlName="complemento">
+            </mat-form-field>
+
+            <div class="grid">
+              <mat-form-field appearance="outline">
+                <mat-label>Cidade</mat-label>
+                <input matInput formControlName="cidade">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Estado</mat-label>
+                <input matInput formControlName="estado">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>CEP</mat-label>
+                <input matInput formControlName="cep">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <!-- Telefone (primeiro item do array) -->
+        <div formArrayName="telefones" class="block">
+          <div [formGroupName]="0" class="grid">
+            <mat-form-field appearance="outline">
+              <mat-label>DDD</mat-label>
+              <input matInput formControlName="ddd">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Número</mat-label>
+              <input matInput formControlName="numero">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <button mat-raised-button color="primary" class="submit-btn" [disabled]="form.invalid || isLoading">
+          <span class="cad-button-content">
+            {{ isLoading ? 'Cadastrando...' : 'Cadastrar' }}
+            <mat-spinner *ngIf="isLoading" diameter="18"></mat-spinner>
+          </span>
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

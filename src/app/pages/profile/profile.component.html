@@ -1,0 +1,44 @@
+<div class="profile-page" *ngIf="!loading(); else loadingTpl">
+  <mat-card class="mat-elevation-z2">
+    <mat-card-header>
+      <mat-card-title>Meu Perfil</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="grid">
+        <div>
+          <h3>Dados</h3>
+          <p><strong>Nome:</strong> {{ user()?.nome }}</p>
+          <p><strong>Email:</strong> {{ user()?.email }}</p>
+        </div>
+      </div>
+
+      <mat-divider class="spacer"></mat-divider>
+
+      <h3>Endereços</h3>
+      <div *ngIf="user()?.enderecos?.length; else noAddr">
+        <mat-list>
+          <mat-list-item *ngFor="let e of user()?.enderecos">
+            {{ e.rua }}, {{ e.numero }} - {{ e.cidade }}/{{ e.estado }} - CEP {{ e.cep }}
+          </mat-list-item>
+        </mat-list>
+      </div>
+      <ng-template #noAddr><p class="muted">Nenhum endereço cadastrado.</p></ng-template>
+
+      <mat-divider class="spacer"></mat-divider>
+
+      <h3>Telefones</h3>
+      <div *ngIf="user()?.telefones?.length; else noTel">
+        <mat-list>
+          <mat-list-item *ngFor="let t of user()?.telefones">
+            ({{ t.ddd }}) {{ t.numero }}
+          </mat-list-item>
+        </mat-list>
+      </div>
+      <ng-template #noTel><p class="muted">Nenhum telefone cadastrado.</p></ng-template>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading">Carregando...</div>
+</ng-template>

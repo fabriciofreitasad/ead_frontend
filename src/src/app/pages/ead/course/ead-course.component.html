@@ -1,0 +1,9 @@
+<h2 *ngIf="curso() as c">{{ c.titulo }}</h2>
+<p *ngIf="curso() as c">{{ c.descricao }}</p>
+
+<mat-nav-list *ngIf="curso() as c">
+  <a mat-list-item *ngFor="let a of c.aulas" (click)="abrirAula(a.id)">
+    <span matListItemTitle>{{ a.ordem }}. {{ a.titulo }}</span>
+    <span matListItemLine>{{ a.duracaoMin || 0 }} min</span>
+  </a>
+</mat-nav-list>

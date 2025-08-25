@@ -1,0 +1,7 @@
+<h2>Meus cursos</h2>
+<mat-nav-list>
+  <a mat-list-item *ngFor="let c of meus()" (click)="abrir(c.id)">
+    <span matListItemTitle>{{ c.titulo }}</span>
+    <span matListItemLine>{{ c.descricao }}</span>
+  </a>
+</mat-nav-list>

@@ -1,0 +1,10 @@
+.profile-page {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+}
+mat-card { width: min(840px, 100%); }
+.grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.spacer { margin: 12px 0; }
+.muted { color: #6b7280; }
+.loading { display:flex; justify-content:center; align-items:center; min-height: 60vh; }
