@@ -69,7 +69,7 @@ export class RegisterComponent {
     return this.form.get('telefones') as FormArray;
   }
 
-  
+
   // Helpers de mensagem de erro
   nomeErrors(): string | null {
     const c = this.form.get('nome');

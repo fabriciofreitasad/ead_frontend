@@ -1,21 +1,22 @@
-<mat-toolbar color="primary" class="topbar">
-  <div class="left">
-    <button mat-icon-button aria-label="menu">
+<mat-toolbar color="primary">
+  <!-- hambúrguer: aparece só quando logado E dentro do /ead -->
+  <ng-container *ngIf="isLogged() && isEadRoute()">
+    <button mat-icon-button (click)="onMenuClick()" aria-label="Abrir menu">
       <mat-icon>menu</mat-icon>
     </button>
-    <img [src]="appLogo" alt="logo" class="logo" />
-  </div>
-
-  <span class="spacer"></span>
-
-  <ng-container *ngIf="!isLogged(); else logged">
-    <a mat-button routerLink="/login">Login</a>
   </ng-container>
 
-  <ng-template #logged>
-    <button mat-button (click)="logout()">
-      <mat-icon>logout</mat-icon>
-      sair
-    </button>
-  </ng-template>
+  <span class="toolbar-title">TargetCar EAD</span>
+  <span class="spacer"></span>
+
+  <!-- NÃO logado: só mostra em rotas que não sejam /login ou /register -->
+  <ng-container *ngIf="!isLogged() && !isAuthRoute()">
+    <a mat-button routerLink="/login">Entrar</a>
+    <a mat-button routerLink="/register">Cadastrar-se</a>
+  </ng-container>
+
+  <!-- logado: botão Sair -->
+  <ng-container *ngIf="isLogged()">
+    <button mat-button (click)="logout()">Sair</button>
+  </ng-container>
 </mat-toolbar>

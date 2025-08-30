@@ -1,33 +1,30 @@
-import { Component, inject, signal } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { AfterViewInit, Component, OnDestroy, ViewChild, inject } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-
-import { AuthService } from '../../../core/services/auth.service';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { SidenavService } from '../../../core/services/sidenav.service';
 
 @Component({
   selector: 'app-ead-layout',
   standalone: true,
-  imports: [
-    CommonModule, RouterModule,
-    MatToolbarModule, MatButtonModule, MatIconModule, MatSidenavModule, MatListModule,
-  ],
+  imports: [CommonModule, RouterModule, MatSidenavModule, MatListModule, MatIconModule],
   templateUrl: './ead-layout.component.html',
   styleUrl: './ead-layout.component.scss'
 })
-export class EadLayoutComponent {
-  opened = signal(true);
-  private auth = inject(AuthService);
+export class EadLayoutComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('drawer') drawer!: MatSidenav;
+  private sidenav = inject(SidenavService);
+  private sub!: Subscription;
 
-  toggle(): void {
-    this.opened.update(v => !v);
+  ngAfterViewInit(): void {
+    this.sub = this.sidenav.toggle$.subscribe(() => this.drawer.toggle());
   }
 
-  isLogged(): boolean {
-    return this.auth.isAuthenticated();
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
   }
 }

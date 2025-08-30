@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { AuthService, LoginResponse } from '../../core/services/auth.service';
 import { PasswordFieldComponent } from '../../shared/components/password-field/password-field.component';
+import { RouterModule } from '@angular/router'; // ⬅️ add
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,8 @@ import { PasswordFieldComponent } from '../../shared/components/password-field/p
     MatInputModule,
     MatSelectModule,
     MatProgressSpinnerModule,
-    PasswordFieldComponent
+    PasswordFieldComponent,
+    RouterModule // ⬅️ add
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',

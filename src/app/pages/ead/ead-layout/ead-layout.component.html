@@ -1,10 +1,5 @@
 <mat-sidenav-container class="layout">
-  <mat-sidenav
-    #drawer
-    [opened]="opened()"
-    (openedChange)="opened.set($event)"
-    mode="side"
-  >
+  <mat-sidenav #drawer mode="side">
     <mat-nav-list>
       <a mat-list-item routerLink="/ead" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <mat-icon>dashboard</mat-icon>
@@ -27,7 +22,7 @@
 
   <mat-sidenav-content>
     <div class="page">
-      <router-outlet></router-outlet>
+      <router-outlet />
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

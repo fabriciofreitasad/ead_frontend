@@ -1,20 +1,31 @@
+<!-- src/app/pages/user-admin/user-admin.component.html -->
 <div class="user-admin">
   <mat-card class="mat-elevation-z2">
+
+    <!-- Barra superior local da página -->
+    <div class="card-top">
+      <button mat-stroked-button color="primary" type="button" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        Voltar ao EAD
+      </button>
+
+      <span class="spacer"></span>
+
+      <form [formGroup]="searchForm" (ngSubmit)="buscar()" class="row quick-search">
+        <mat-form-field appearance="outline" class="grow">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="email@dominio.com" />
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Buscar</button>
+      </form>
+    </div>
+
     <mat-card-header>
       <mat-card-title>Administração de Usuário</mat-card-title>
     </mat-card-header>
-    <mat-card-content>
-      <section class="search">
-        <form [formGroup]="searchForm" (ngSubmit)="buscar()" class="row">
-          <mat-form-field appearance="outline" class="grow">
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="email" placeholder="email@dominio.com" />
-          </mat-form-field>
-          <button mat-raised-button color="primary" type="submit">Buscar</button>
-        </form>
-      </section>
 
-      <section *ngIf="user() as u">
+    <mat-card-content>
+      <section *ngIf="user() as u; else vazio">
         <mat-tab-group>
           <mat-tab label="Dados do Usuário">
             <div class="pane">
@@ -61,7 +72,9 @@
                       <mat-label>CEP</mat-label>
                       <input matInput formControlName="cep" />
                     </mat-form-field>
-                    <button mat-stroked-button color="primary" type="button" (click)="atualizarEndereco(i)">Atualizar endereço</button>
+                    <button mat-stroked-button color="primary" type="button" (click)="atualizarEndereco(i)">
+                      Atualizar endereço
+                    </button>
                   </div>
                 </div>
 
@@ -80,7 +93,9 @@
                       <mat-label>Número</mat-label>
                       <input matInput formControlName="numero" />
                     </mat-form-field>
-                    <button mat-stroked-button color="primary" type="button" (click)="atualizarTelefone(i)">Atualizar telefone</button>
+                    <button mat-stroked-button color="primary" type="button" (click)="atualizarTelefone(i)">
+                      Atualizar telefone
+                    </button>
                   </div>
                 </div>
 
@@ -153,6 +168,12 @@
           </mat-tab>
         </mat-tab-group>
       </section>
+
+      <ng-template #vazio>
+        <div class="empty">
+          Informe um email e clique em <strong>Buscar</strong> para carregar o usuário.
+        </div>
+      </ng-template>
     </mat-card-content>
   </mat-card>
 </div>
