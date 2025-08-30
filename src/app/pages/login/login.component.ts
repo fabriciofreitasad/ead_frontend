@@ -72,7 +72,7 @@ export class LoginComponent {
         next: (response: LoginResponse) => {
           this.authService.saveToken(response.token);
           localStorage.setItem('email', email);
-          this.router.navigate(['/ead'], { queryParams: { email } });
+          this.router.navigate(['/ead']); // garante que entra no layout EAD
         },
         error: (error) => {
           console.error('Erro ao entrar', error);

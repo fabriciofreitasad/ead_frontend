@@ -1,7 +1,24 @@
-<h2>Meus cursos</h2>
-<mat-nav-list>
-  <a mat-list-item *ngFor="let c of meus()" (click)="abrir(c.id)">
-    <span matListItemTitle>{{ c.titulo }}</span>
-    <span matListItemLine>{{ c.descricao }}</span>
-  </a>
-</mat-nav-list>
+<div class="my-courses grid">
+  <mat-card class="course-card" *ngFor="let c of meusCursos" [routerLink]="['/ead/curso', c.id]">
+    <img *ngIf="c.thumb" mat-card-image [src]="c.thumb" alt="{{ c.titulo }}">
+    <mat-card-header>
+      <mat-card-title>{{ c.titulo }}</mat-card-title>
+      <mat-card-subtitle>{{ c.descricao }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="progress">
+        <mat-icon>timeline</mat-icon>
+        <span>{{ c.progresso }}%</span>
+      </div>
+      <mat-progress-bar mode="determinate" [value]="c.progresso"></mat-progress-bar>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-stroked-button color="primary">Continuar</button>
+      <button mat-button [routerLink]="['/ead/curso', c.id]">
+        Detalhes
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

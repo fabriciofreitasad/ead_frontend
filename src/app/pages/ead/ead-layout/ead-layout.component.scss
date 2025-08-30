@@ -1,7 +1,4 @@
-.shell { height: 100vh; }
-.toolbar .title { margin-left: 8px; font-weight: 600; }
-.spacer { flex: 1 1 auto; }
-.sidenav { width: 260px; }
-.logo { padding: 16px; font-weight: 700; }
-.content { padding: 16px; }
+.layout { height: calc(100vh - 64px); }
+.page { padding: 16px; }
+mat-sidenav { width: 260px; }
 a.active { font-weight: 600; }

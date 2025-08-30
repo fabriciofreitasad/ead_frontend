@@ -1,9 +1,28 @@
-<h2 *ngIf="curso() as c">{{ c.titulo }}</h2>
-<p *ngIf="curso() as c">{{ c.descricao }}</p>
+<div class="course">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Curso de Rastreamento Veicular</mat-card-title>
+      <mat-card-subtitle>Aprenda a usar a plataforma da TargetCar</mat-card-subtitle>
+    </mat-card-header>
 
-<mat-nav-list *ngIf="curso() as c">
-  <a mat-list-item *ngFor="let a of c.aulas" (click)="abrirAula(a.id)">
-    <span matListItemTitle>{{ a.ordem }}. {{ a.titulo }}</span>
-    <span matListItemLine>{{ a.duracaoMin || 0 }} min</span>
-  </a>
-</mat-nav-list>
+    <mat-card-content>
+      <p>
+        Este curso cobre desde a introdução ao sistema de rastreamento até a gestão
+        de frota com relatórios e alertas inteligentes.
+      </p>
+
+      <h3>Conteúdo Programático</h3>
+      <mat-list>
+        <mat-list-item *ngFor="let aula of aulas; let i = index" [routerLink]="['/ead/curso', 1, 'aula', i+1]">
+          <mat-icon matListIcon>play_circle</mat-icon>
+          <div matLine>Aula {{ i + 1 }} - {{ aula }}</div>
+          <div matLine class="secondary">Clique para assistir</div>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Iniciar Curso</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

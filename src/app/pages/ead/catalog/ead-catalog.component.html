@@ -1,18 +1,6 @@
-<h2>Catálogo de cursos</h2>
-
-<div class="cards">
-  <mat-card *ngFor="let c of catalogo()">
-    <mat-card-header>
-      <mat-card-title>{{ c.titulo }}</mat-card-title>
-      <mat-card-subtitle>{{ c.descricao }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>Carga horária: {{ c.cargaHoraria || 0 }}h</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="entrar(c)">
-        {{ c.matriculado ? 'Acessar' : 'Matricular' }}
-      </button>
-    </mat-card-actions>
-  </mat-card>
-</div>
+<mat-card>
+  <mat-card-title>Catálogo de Cursos</mat-card-title>
+  <mat-card-content>
+    <p>Lista de cursos (mock). Depois integraremos com o backend.</p>
+  </mat-card-content>
+</mat-card>

@@ -1,42 +1,40 @@
 // src/app/core/services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { API_CONFIG } from '../config/api.config';
+import { map } from 'rxjs';
 
-export interface LoginResponse {
-  token: string;
-}
+export interface LoginResponse { token: string; }
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly TOKEN_KEY = 'token';
-  private readonly base = `${API_CONFIG.base}/usuario`; // seu backend usa /usuario/login
+  private base = `${API_CONFIG.base}/usuario`;
 
   constructor(private http: HttpClient) {}
 
-  // --- Auth API ---
-  login(email: string, senha: string): Observable<LoginResponse> {
-    // Controller do backend: POST /usuario/login (não é /auth/login)
-    return this.http.post<LoginResponse>(`${this.base}/login`, { email, senha });
+  login(email: string, senha: string) {
+    // backend devolve texto (token ou mensagem)
+    return this.http.post(`${this.base}/login`, { email, senha }, { responseType: 'text' })
+      .pipe(
+        map((text: string) => {
+          // se vier "Bearer xxx" ou só "xxx", normaliza:
+          const raw = text?.trim() ?? '';
+          const token = raw.toLowerCase().startsWith('bearer ') ? raw.substring(7) : raw;
+          return { token } as LoginResponse;
+        })
+      );
   }
 
-  // --- Token storage ---
-  saveToken(token: string): void {
-    localStorage.setItem(this.TOKEN_KEY, token);
-  }
-
-  getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
-  }
-
-  clearToken(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
-    // se você guarda o email para /profile ou buscas, pode limpar também:
-    localStorage.removeItem('email');
+  saveToken(token: string) {
+    localStorage.setItem('token', token);
   }
 
   isAuthenticated(): boolean {
-    return !!this.getToken();
+    return !!localStorage.getItem('token');
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('email');
   }
 }

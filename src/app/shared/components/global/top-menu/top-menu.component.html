@@ -1,17 +1,21 @@
-<mat-toolbar class="app-top-menu-toolbar">
-    <span class="logo">
-        <a routerLink="/">
-            <img [src]="appLogo" alt="Logo" class="logo-img" />
-        </a>
-    </span>
+<mat-toolbar color="primary" class="topbar">
+  <div class="left">
+    <button mat-icon-button aria-label="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <img [src]="appLogo" alt="logo" class="logo" />
+  </div>
 
-    <span class="spacer"></span>
+  <span class="spacer"></span>
 
-    <a mat-button>Preços</a>
-    <a mat-button>Contatos</a>
+  <ng-container *ngIf="!isLogged(); else logged">
+    <a mat-button routerLink="/login">Login</a>
+  </ng-container>
 
-    <span class="spacer"></span>
-
-    <button mat-button [disabled]="estaNaRotaLogin()" routerLink="/login">Entrar</button>
-    <button mat-flat-button [disabled]="estaNaRotaRegister()" routerLink="/register">Cadastrar-se</button>
+  <ng-template #logged>
+    <button mat-button (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      sair
+    </button>
+  </ng-template>
 </mat-toolbar>

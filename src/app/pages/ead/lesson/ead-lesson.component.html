@@ -1,9 +1,6 @@
-<h2 *ngIf="aula() as a">{{ a.titulo }}</h2>
-<p *ngIf="aula() as a">Duração: {{ a.duracaoMin || 0 }} min</p>
-<div class="player" *ngIf="aula() as a">
-  <!-- Placeholder do player (substitua por um player real quando tiver a URL) -->
-  <div class="video-placeholder">
-    <p>Player de vídeo</p>
-    <small *ngIf="a.videoUrl">URL: {{ a.videoUrl }}</small>
-  </div>
-</div>
+<mat-card>
+  <mat-card-title>Aula</mat-card-title>
+  <mat-card-content>
+    <p>Conteúdo da aula aqui.</p>
+  </mat-card-content>
+</mat-card>
